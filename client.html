@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="Send()">Submit</button>
+    <button onclick="Get_users()">Get list users</button>
+    <button onclick="send_request()">Send request</button>
+    <script>
+
+        function Send() {
+            fetch("http://127.0.0.1:8000/create/user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: "Rahimi",
+                    password: "03032005",
+                    email: "rahimimehruz90@gmail.com",
+                }),
+            });
+        }
+        function Get_users() {
+            fetch("http://127.0.0.1:8000/users/all")
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+        }
+        // 
+        function send_request() {
+            fetch("http://127.0.0.1:8000/chat/edith/v1", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    content: "Tajikistan",
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data[0].Ansver)
+
+                });
+        }
+    </script>
+</body>
+
+</html>
